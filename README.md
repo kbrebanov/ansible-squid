@@ -1,6 +1,8 @@
 squid
 =====
 
+[![Ansible Role](https://img.shields.io/ansible/role/5471.svg)](https://galaxy.ansible.com/list#/roles/5471)
+
 Installs Squid
 
 Requirements
