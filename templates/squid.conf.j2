@@ -919,6 +919,12 @@ acl Safe_ports port 591		# filemaker
 acl Safe_ports port 777		# multiling http
 acl CONNECT method CONNECT
 
+{% if squid_acls %}
+{% for acl in squid_acls %}
+acl {{ acl.name }} {{ acl.type }} {{ acl.argument }}
+{% endfor %}
+{% endif %}
+
 #  TAG: follow_x_forwarded_for
 #	Allowing or Denying the X-Forwarded-For header to be followed to
 #	find the original source of a request.
@@ -1056,7 +1062,10 @@ http_access deny manager
 # Adapt localnet in the ACL section to list your (internal) IP networks
 # from where browsing should be allowed
 #http_access allow localnet
-http_access allow localhost
+
+{% for client in squid_http_access_allow_clients %}
+http_access allow {{ client }}
+{% endfor %}
 
 # And finally deny all other access to this proxy
 http_access deny all
@@ -1459,7 +1468,7 @@ http_access deny all
 #
 
 # Squid normally listens to port 3128
-http_port 3128
+http_port {{ squid_http_port }}
 
 #  TAG: https_port
 # Note: This option is only available if Squid is rebuilt with the
@@ -6865,6 +6874,7 @@ refresh_pattern .		0	20%	4320
 #	X-Forwarded-For entries, and place the client IP as the sole entry.
 #Default:
 # forwarded_for on
+forwarded_for {{ squid_forwarded_for }}
 
 #  TAG: cachemgr_passwd
 #	Specify passwords for cachemgr operations.
@@ -7161,3 +7171,7 @@ refresh_pattern .		0	20%	4320
 #	See also: workers
 #Default:
 # Let operating system decide.
+
+{% if squid_proxy_only %}
+cache deny all
+{% endif %}
