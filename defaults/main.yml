@@ -7,3 +7,4 @@ squid_http_access_allow_clients:
   - localhost
 squid_http_port: 3128
 squid_proxy_only: false
+squid_tcp_outgoing_address: ''

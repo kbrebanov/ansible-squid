@@ -1791,6 +1791,9 @@ http_port {{ squid_http_port }}
 #
 #Default:
 # Address selection is performed by the operating system.
+{% if squid_tcp_outgoing_address %}
+tcp_outgoing_address {{ squid_tcp_outgoing_address }}
+{% endif %}
 
 #  TAG: host_verify_strict
 #	Regardless of this option setting, when dealing with intercepted

@@ -20,6 +20,7 @@ Role Variables
 | squid_http_access_allow_clients | ["localhost"]   | List of clients to allow access                    |
 | squid_http_port                 | 3128            | The port where Squid will listen for HTTP requests |
 | squid_proxy_only                | false           | If enabled, disables caching                       |
+| squid_tcp_outgoing_address      | ''              | Map requests to different outgoing IP address      |
 
 Dependencies
 ------------
