@@ -2,6 +2,7 @@
 # defaults file for squid
 
 squid_acls: []
+squid_dns_v4_first: "off"
 squid_forwarded_for: "on"
 squid_http_access_allow_clients:
   - localhost

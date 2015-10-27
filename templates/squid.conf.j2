@@ -6800,7 +6800,7 @@ refresh_pattern .		0	20%	4320
 #	  connectivity is used (and tested), potentially hiding network
 #	  problems which would otherwise be detected and warned about.
 #Default:
-# dns_v4_first off
+dns_v4_first {{ squid_dns_v4_first }}
 
 #  TAG: ipcache_size	(number of entries)
 #	Maximum number of DNS IP cache entries.
