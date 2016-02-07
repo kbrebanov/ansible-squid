@@ -1,7 +1,7 @@
 squid
 =====
 
-[![Ansible Role](https://img.shields.io/ansible/role/5471.svg)](https://galaxy.ansible.com/list#/roles/5471)
+[![Build Status](https://travis-ci.org/kbrebanov/ansible-squid.svg?branch=master)](https://travis-ci.org/kbrebanov/ansible-squid)
 
 Installs Squid
 
