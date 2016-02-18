@@ -8,7 +8,7 @@ Installs Squid
 Requirements
 ------------
 
-This role requires Ansible 1.4 or higher.
+This role requires Ansible 1.9 or higher.
 
 Role Variables
 --------------
@@ -35,7 +35,7 @@ Example Playbook
 ----------------
 
 Install Squid
-```
+```yaml
 - hosts: all
   roles:
     - kbrebanov.squid

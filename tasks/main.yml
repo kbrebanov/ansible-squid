@@ -3,46 +3,63 @@
 
 - name: Include distribution specific variables
   include_vars: "{{ ansible_distribution }}.yml"
-  tags: squid
+  tags:
+    - squid
 
 - include: CentOS.yml
   when: ansible_distribution == "CentOS"
-  tags: squid
+  tags:
+    - squid
 
 - include: Ubuntu.yml
   when: ansible_distribution == "Ubuntu"
-  tags: squid
+  tags:
+    - squid
 
 - name: Create Squid configuration file
-  template: >
-    src=squid.conf.j2
-    dest={{ squid_config_dir }}/squid.conf
-    owner=root
-    group=root
-    mode=0644
-  notify: restart squid
-  tags: squid
+  become: yes
+  template:
+    src: squid.conf.j2
+    dest: "{{ squid_config_dir }}/squid.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart squid
+  tags:
+    - squid
 
 - name: Create Squid error page CSS file
-  template: >
-    src=errorpage.css.j2
-    dest={{ squid_config_dir }}/errorpage.css
-    owner=root
-    group=root
-    mode=0644
-  notify: restart squid
-  tags: squid
+  become: yes
+  template:
+    src: errorpage.css.j2
+    dest: "{{ squid_config_dir }}/errorpage.css"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart squid
+  tags:
+    - squid
 
 - name: Create Squid MSNT auth configuration file
-  template: >
-    src=msntauth.conf.j2
-    dest={{ squid_config_dir }}/msntauth.conf
-    owner=root
-    group=root
-    mode=0644
-  notify: restart squid
-  tags: squid
+  become: yes
+  template:
+    src: msntauth.conf.j2
+    dest: "{{ squid_config_dir }}/msntauth.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart squid
+  tags:
+    - squid
 
 - name: Ensure Squid service is started and enabled on boot
-  service: name={{ squid_service_name }} state=started enabled=yes
-  tags: squid
+  become: yes
+  service:
+    name: "{{ squid_service_name }}"
+    state: started
+    enabled: yes
+  tags:
+    - squid
