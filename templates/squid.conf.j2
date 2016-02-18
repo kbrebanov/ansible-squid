@@ -2636,7 +2636,13 @@ tcp_outgoing_address {{ squid_tcp_outgoing_address }}
 #		* There is also a 'cache_peer_access' tag in the ACL
 #		  section.
 #Default:
+{% if squid_cache_peers %}
+{% for cache_peer in squid_cache_peers %}
+cache_peer {{ cache_peer.hostname }} {{ cache_peer.type }} {{ cache_peer.proxy_port }} {{ cache_peer.icp_port }} {{ cache_peer.options | join(" ") }}
+{% endfor %}
+{% else %}
 # none
+{% endif %}
 
 #  TAG: cache_peer_access
 #	Similar to 'cache_peer_domain' but provides more flexibility by
@@ -5950,7 +5956,13 @@ refresh_pattern .		0	20%	4320
 #	This clause supports both fast and slow acl types.
 #	See http://wiki.squid-cache.org/SquidFaq/SquidAcl for details.
 #Default:
+{% if squid_always_directs %}
+{% for always_direct in squid_always_directs %}
+always_direct {{ always_direct.type }} {{ always_direct.acl_name }}
+{% endfor %}
+{% else %}
 # Prevent any cache_peer being used for this request.
+{% endif %}
 
 #  TAG: never_direct
 #	Usage: never_direct allow|deny [!]aclname ...
@@ -5979,7 +5991,13 @@ refresh_pattern .		0	20%	4320
 #	This clause supports both fast and slow acl types.
 #	See http://wiki.squid-cache.org/SquidFaq/SquidAcl for details.
 #Default:
+{% if squid_never_directs %}
+{% for never_direct in squid_never_directs %}
+never_direct {{ never_direct.type }} {{ never_direct.acl_name }}
+{% endfor %}
+{% else %}
 # Allow DNS results to be used for this request.
+{% endif %}
 
 # ADVANCED NETWORKING OPTIONS
 # -----------------------------------------------------------------------------
