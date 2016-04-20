@@ -1042,8 +1042,10 @@ acl {{ acl.name }} {{ acl.type }} {{ acl.argument }}
 # Deny requests to certain unsafe ports
 http_access deny !Safe_ports
 
+{% if squid_deny_connect_non_ssl %}
 # Deny CONNECT to other than secure SSL ports
 http_access deny CONNECT !SSL_ports
+{% endif %}
 
 # Only allow cachemgr access from localhost
 http_access allow localhost manager
