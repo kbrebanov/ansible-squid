@@ -12,3 +12,5 @@ squid_http_port: 3128
 squid_never_directs: []
 squid_proxy_only: false
 squid_tcp_outgoing_address: ''
+
+squid_deny_connect_non_ssl: true
