@@ -23,7 +23,11 @@ html body {
 	margin-left: 15px;
 	padding: 10px;
 	padding-left: 100px;
-	background: url('http://www.squid-cache.org/Artwork/SN.png') no-repeat left;
+{% if ansible_distribution_release == "xenial" %}
+        background: url('/squid-internal-static/icons/SN.png') no-repeat left;
+{% else %}
+        background: url('http://www.squid-cache.org/Artwork/SN.png') no-repeat left;
+{% endif %}
 }
 
 /* initial title */

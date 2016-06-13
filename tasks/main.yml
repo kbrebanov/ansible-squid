@@ -6,6 +6,11 @@
   tags:
     - squid
 
+- name: Include release specific variables
+  include_vars: "{{ ansible_distribution_release }}.yml"
+  tags:
+    - squid
+
 - include: CentOS.yml
   when: ansible_distribution == "CentOS"
   tags:
@@ -50,6 +55,7 @@
     owner: root
     group: root
     mode: 0644
+  when: ansible_distribution_release == "trusty"
   notify:
     - restart squid
   tags:

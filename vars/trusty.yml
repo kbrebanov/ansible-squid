@@ -1,0 +1,8 @@
+---
+# vars file for squid (Ubuntu Trusty specific)
+
+squid_packages:
+  - squid3
+squid_config_dir: /etc/squid3
+squid_coredump_dir: /var/spool/squid3
+squid_service_name: squid3

@@ -1,0 +1,8 @@
+---
+# vars file for squid (Ubuntu Xenial specific)
+
+squid_packages:
+  - squid
+squid_config_dir: /etc/squid
+squid_coredump_dir: /var/spool/squid
+squid_service_name: squid
