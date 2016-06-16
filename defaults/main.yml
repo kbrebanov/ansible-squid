@@ -1,6 +1,7 @@
 ---
 # defaults file for squid
 
+squid_access_log: "daemon:/var/log/{{ squid_service_name }}/access.log squid"
 squid_acls: []
 squid_always_directs: []
 squid_cache_peers: []
@@ -9,6 +10,8 @@ squid_forwarded_for: "on"
 squid_http_access_allow_clients:
   - localhost
 squid_http_port: 3128
+squid_netdb_filename: "stdio:/var/log/{{ squid_service_name }}/netdb.state"
 squid_never_directs: []
+squid_pinger_enable: "on"
 squid_proxy_only: false
 squid_tcp_outgoing_address: ''

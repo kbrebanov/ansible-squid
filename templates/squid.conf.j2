@@ -67,3 +67,9 @@ forwarded_for {{ squid_forwarded_for }}
 {% if squid_proxy_only %}
 cache deny all
 {% endif %}
+
+access_log {{ squid_access_log }}
+
+netdb_filename {{ squid_netdb_filename }}
+
+pinger_enable {{ squid_pinger_enable }}
