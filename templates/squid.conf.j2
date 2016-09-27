@@ -62,6 +62,10 @@ never_direct {{ never_direct.type }} {{ never_direct.acl_name }}
 
 dns_v4_first {{ squid_dns_v4_first }}
 
+via {{ squid_via }}
+
+httpd_suppress_version_string {{ squid_httpd_suppress_version_string }}
+
 forwarded_for {{ squid_forwarded_for }}
 
 {% if squid_proxy_only %}
@@ -73,3 +77,7 @@ access_log {{ squid_access_log }}
 netdb_filename {{ squid_netdb_filename }}
 
 pinger_enable {{ squid_pinger_enable }}
+
+{% if squid_visible_hostname is defined and squid_visible_hostname != '' %}
+visible_hostname {{ squid_visible_hostname }}
+{% endif %}

@@ -10,8 +10,11 @@ squid_forwarded_for: "on"
 squid_http_access_allow_clients:
   - localhost
 squid_http_port: 3128
+squid_httpd_suppress_version_string: "off"
 squid_netdb_filename: "stdio:/var/log/{{ squid_service_name }}/netdb.state"
 squid_never_directs: []
 squid_pinger_enable: "on"
 squid_proxy_only: false
 squid_tcp_outgoing_address: ''
+squid_via: "on"
+squid_visible_hostname: ''
