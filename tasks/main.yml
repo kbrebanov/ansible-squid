@@ -3,11 +3,18 @@
 
 - name: Include distribution specific variables
   include_vars: "{{ ansible_distribution }}.yml"
+  ignore_errors: yes
   tags:
     - squid
 
 - name: Include release specific variables
   include_vars: "{{ ansible_distribution_release }}.yml"
+  ignore_errors: yes
+  tags:
+    - squid
+
+- include: Archlinux.yml
+  when: ansible_distribution == "Archlinux"
   tags:
     - squid
 

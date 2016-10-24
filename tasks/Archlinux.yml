@@ -1,0 +1,13 @@
+---
+# tasks file for squid (Arch specific)
+
+- name: Install squid packages
+  become: yes
+  pacman:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ squid_packages }}"
+  tags:
+    - squid
+
