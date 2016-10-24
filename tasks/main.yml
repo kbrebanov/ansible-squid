@@ -2,14 +2,20 @@
 # tasks file for squid
 
 - name: Include distribution specific variables
-  include_vars: "{{ ansible_distribution }}.yml"
-  ignore_errors: yes
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+      - "vars/{{ ansible_distribution }}.yml"
+      skip: true
   tags:
     - squid
 
 - name: Include release specific variables
-  include_vars: "{{ ansible_distribution_release }}.yml"
-  ignore_errors: yes
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+      - "vars/{{ ansible_distribution_release }}.yml"
+      skip: true
   tags:
     - squid
 
