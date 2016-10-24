@@ -5,16 +5,41 @@ squid_access_log: "daemon:/var/log/{{ squid_service_name }}/access.log squid"
 squid_acls: []
 squid_always_directs: []
 squid_cache_peers: []
+squid_cache_dir: {}
 squid_dns_v4_first: "off"
 squid_forwarded_for: "on"
 squid_http_access_allow_clients:
   - localhost
+  - localnet
 squid_http_port: 3128
 squid_httpd_suppress_version_string: "off"
+squid_maximum_object_size: ""
 squid_netdb_filename: "stdio:/var/log/{{ squid_service_name }}/netdb.state"
 squid_never_directs: []
 squid_pinger_enable: "on"
 squid_proxy_only: false
+squid_refresh_patterns:
+  - regex: "^ftp:"
+    min: 1440
+    percent: "20%"
+    max: 10080
+  - regex: "^gopher"
+    min: 1440
+    percent: "0%"
+    max: 1440
+  - case_ins: true
+    regex: "(/cgi-bin/|\\?)"
+    min: 0
+    percent: "0%"
+    max: 0
+  - regex: "(Release|Packages(.gz)*)$"
+    min: 0
+    percent: "0%"
+    max: 2880
+  - regex: "."
+    min: 0
+    percent: "20%"
+    max: 4320
 squid_tcp_outgoing_address: ''
 squid_via: "on"
 squid_visible_hostname: ''

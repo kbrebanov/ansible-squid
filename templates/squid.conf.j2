@@ -40,13 +40,24 @@ cache_peer {{ cache_peer.hostname }} {{ cache_peer.type }} {{ cache_peer.proxy_p
 {% endfor %}
 {% endif %}
 
-coredump_dir {{ squid_coredump_dir }}
+{% if squid_maximum_object_size %}
+maximum_object_size {{ squid_maximum_object_size }}
+{% endif %}
 
-refresh_pattern ^ftp:		1440	20%	10080
-refresh_pattern ^gopher:	1440	0%	1440
-refresh_pattern -i (/cgi-bin/|\?) 0	0%	0
-refresh_pattern (Release|Packages(.gz)*)$      0       20%     2880
-refresh_pattern .		0	20%	4320
+{% if squid_cache_dir %}
+cache_dir {{ squid_cache_dir.type }} {{ squid_cache_dir.path }} {{ squid_cache_dir.options }}
+{% endif %}
+
+{% if squid_coredump_dir %}
+coredump_dir {{ squid_coredump_dir }}
+{% endif %}
+
+{% if squid_refresh_patterns %}
+{% for rp in squid_refresh_patterns %}
+refresh_pattern {% if rp.case_ins is defined and rp.case_ins %}-i{% endif %} {{ rp.regex }} {{ rp.min }} {{ rp.percent }} {{ rp.max }} {% if rp.options is defined %}{{ rp.options }}{% endif %}
+
+{% endfor %}
+{% endif %}
 
 {% if squid_always_directs %}
 {% for always_direct in squid_always_directs %}
