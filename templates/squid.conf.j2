@@ -13,7 +13,7 @@ acl Safe_ports port 591		# filemaker
 acl Safe_ports port 777		# multiling http
 acl CONNECT method CONNECT
 
-{% if squid_auth_param %}
+{% if squid_auth_params %}
 {% for acl in squid_auth_params %}
 auth_param {{ acl.scheme }} {{ acl.parameter }} {{ acl.settings}}
 {% endfor %}
