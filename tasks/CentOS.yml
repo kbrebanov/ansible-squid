@@ -1,2 +1,12 @@
 ---
 # tasks file for squid (CentOS specific)
+- name: Install squid packages
+  become: yes
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - "{{ squid_packages }}"
+  tags:
+    - squid

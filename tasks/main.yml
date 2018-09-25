@@ -8,11 +8,12 @@
 
 - name: Include release specific variables
   include_vars: "{{ ansible_distribution_release }}.yml"
+  when: ansible_distribution == "Ubuntu"
   tags:
     - squid
 
 - include: CentOS.yml
-  when: ansible_distribution == "CentOS"
+  when: ansible_distribution == "CentOS" or ansible_distribution == "RedHat"
   tags:
     - squid
 

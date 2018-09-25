@@ -7,6 +7,10 @@ galaxy_info:
   min_ansible_version: 1.9
   github_branch: master
   platforms:
+    - name: EL
+      versions:
+        - 6
+        - 7
     - name: Ubuntu
       versions:
         - trusty
