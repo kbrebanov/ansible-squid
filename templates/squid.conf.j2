@@ -30,6 +30,7 @@ http_access deny all
 
 http_port {{ squid_http_port }}
 
+
 {% if squid_tcp_outgoing_address %}
 tcp_outgoing_address {{ squid_tcp_outgoing_address }}
 {% endif %}
@@ -40,6 +41,15 @@ cache_peer {{ cache_peer.hostname }} {{ cache_peer.type }} {{ cache_peer.http_po
 {% endfor %}
 {% endif %}
 
+{% if squid_cache_mem is defined %}
+cache_mem {{ squid_cache_mem }} MB
+{% endif %}
+{% if squid_maximum_object_size is defined %}
+maximum_object_size {{ squid_maximum_object_size }} MB
+{% endif %}
+{% if squid_cache_dir is defined %}
+cache_dir ufs {{ squid_cache_dir }} {{ squid_cache_size | default(16384) }} 16 256
+{% endif %}
 coredump_dir {{ squid_coredump_dir }}
 
 refresh_pattern ^ftp:		1440	20%	10080
