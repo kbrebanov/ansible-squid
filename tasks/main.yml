@@ -2,12 +2,25 @@
 # tasks file for squid
 
 - name: Include distribution specific variables
-  include_vars: "{{ ansible_distribution }}.yml"
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+      - "vars/{{ ansible_distribution }}.yml"
+      skip: true
   tags:
     - squid
 
 - name: Include release specific variables
-  include_vars: "{{ ansible_distribution_release }}.yml"
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+      - "vars/{{ ansible_distribution_release }}.yml"
+      skip: true
+  tags:
+    - squid
+
+- include: Archlinux.yml
+  when: ansible_distribution == "Archlinux"
   tags:
     - squid
 
